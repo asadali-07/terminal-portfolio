@@ -2,15 +2,18 @@
 import commands from "@/data/command";
 import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Counter } from "counterapi";
 
 const Terminal = () => {
+  const counter = new Counter({
+    workspace: "sam",
+  });
   const [history, setHistory] = useState([]);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [historyIndex, setHistoryIndex] = useState(null);
+  const [count, setCount] = useState(null);
   const bottomRef = useRef(null);
-  let count = useRef(0);
-  count.current++;
 
   const handleCommand = (e) => {
     if (e.key === "ArrowUp") {
@@ -53,6 +56,25 @@ const Terminal = () => {
       }, 300);
     }
   };
+
+  useEffect(() => {
+    const fetchCount = async () => {
+      // Check if the user has already viewed the portfolio
+      const viewed = sessionStorage.getItem("viewedPortfolio");
+
+      if (!viewed) {
+        // Count this as a new visit
+        const result = await counter.up("portfolio-counter");
+        sessionStorage.setItem("viewedPortfolio", "true");
+        setCount(result.data.up_count);
+      } else {
+        // Just fetch the existing count
+        const result = await counter.get("portfolio-counter");
+        setCount(result.data.up_count);
+      }
+    };
+    fetchCount();
+  }, []);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -110,7 +132,7 @@ const Terminal = () => {
               <div className="text-green-300 text-xs">
                 Portfolio Views:{" "}
                 <span className="bg-green-400 text-black px-1">
-                  {count.current}
+                  {count !== null ? count : "Loading..."}
                 </span>
               </div>
             </div>
