@@ -23,14 +23,14 @@ export const metadata = {
   authors: [{ name: "Asad Ali" }],
   creator: "Asad Ali",
   publisher: "Asad Ali",
-  metadataBase: new URL('https://yourportfolio.com'),
+  metadataBase: new URL('https://terminal-portfolio-phi-ten.vercel.app/'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://yourportfolio.com',
+    url: 'https://terminal-portfolio-phi-ten.vercel.app/',
     title: 'Asad Ali - Full Stack Developer Portfolio',
     description: 'Full Stack Developer specializing in React, Next.js, and modern web technologies. View my projects, skills, and experience.',
     siteName: 'Asad Ali Portfolio',
