@@ -120,7 +120,7 @@ const Terminal = () => {
       </div>
 
       {/* Terminal Content */}
-      <div className="relative z-10 p-4 text-green-400 font-mono text-sm">
+      <div className="relative z-10 p-4 text-green-400 font-mono text-sm overflow-y-auto max-h-screen [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
         {/* Header */}
         <div className="mb-4">
           <div className="flex justify-between items-center mb-2">
